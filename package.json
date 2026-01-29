@@ -1,5 +1,5 @@
 {
-  "name": "tellor-pricefeed-dashboard",
+  "name": "api3-pricefeed-dashboard",
   "version": "0.1.0",
   "private": true,
   "scripts": {

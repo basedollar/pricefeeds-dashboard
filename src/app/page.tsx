@@ -6,10 +6,10 @@ export default function Home() {
       <main className="max-w-7xl mx-auto">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-black dark:text-zinc-50 mb-2">
-            Tellor Price Feeds
+            API3 Price Feeds
           </h1>
           <p className="text-zinc-600 dark:text-zinc-400">
-            View all available price feeds with their current data
+            View all available price feeds on Base with their current data
           </p>
         </div>
         <FeedsTable />

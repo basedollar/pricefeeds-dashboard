@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { createPublicClient, http } from "viem";
-import { saga } from "viem/chains";
+import { base } from "viem/chains";
 import { feeds } from "@/addresses";
 import ABI from "@/abis/GuardedLiquityV2OracleAdaptor";
 
 interface FeedData {
   feedname: string;
   address: string;
+  note?: string;
   decimals?: number;
   latestRoundData?: {
     roundId: bigint;
@@ -30,7 +31,7 @@ export function FeedsTable() {
     const fetchData = async () => {
       try {
         const client = createPublicClient({
-          chain: saga,
+          chain: base,
           transport: http(),
         });
 
@@ -73,6 +74,7 @@ export function FeedsTable() {
           return {
             feedname: feed.feedname,
             address: feed.address,
+            note: (feed as { note?: string }).note,
             decimals:
               decimalsResult.status === "success"
                 ? decimalsResult.result as number
@@ -140,6 +142,9 @@ export function FeedsTable() {
             <th className="px-6 py-3 text-left font-semibold text-zinc-900 dark:text-zinc-50">
               Paused
             </th>
+            <th className="px-6 py-3 text-left font-semibold text-zinc-900 dark:text-zinc-50">
+              Note
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -194,6 +199,9 @@ export function FeedsTable() {
                 >
                   {feed.paused ? "Paused" : "Active"}
                 </span>
+              </td>
+              <td className="px-6 py-4 text-xs text-zinc-500 dark:text-zinc-500 italic">
+                {feed.note || "-"}
               </td>
             </tr>
           ))}
